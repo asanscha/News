@@ -1,11 +1,16 @@
 // Grab the articles as a json
-$.getJSON("/articles", function(data) {
+$(document).ready(function(){
+  console.log("JS LOADED")
+  $.ajax({
+  method:"GET",
+  url: "/articles"
+}).then(function(data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
     $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
   }
-});
+}).catch(err=>console.log(err))
 
 
 // Whenever someone clicks a p tag
@@ -70,3 +75,5 @@ $(document).on("click", "#savenote", function() {
   $("#titleinput").val("");
   $("#bodyinput").val("");
 });
+})
+
